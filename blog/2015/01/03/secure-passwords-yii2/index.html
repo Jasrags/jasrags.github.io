@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Secure passwords in Yii2 framework &mdash; Jasrags.github.io &mdash; Ramblings from Dallas, TX</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link href="/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="/components/highlightjs/styles/github.css" />
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Jasrags.github.io activity feed" />
+        <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code { background-color: inherit; }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/">Jasrags.github.io</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                <li><a href="/blog">Posts Archive</a></li>
+                                <li><a href="/blog/categories">Categories</a></li>
+                                <li><a href="/blog/tags">Tags</a></li>
+                                <li><a href="/about">About</a></li>
+                                <li><a href="/resume">Resume</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mainContent container">
+            <div class="row-fluid">
+                <div class="span8">
+                        <article>
+        <header>
+            <h2>Secure passwords in Yii2 framework <small>post</small></h2>
+        </header>
+        <div>
+            <p><em>Recently I contributed a Yii2 framework solution to the <a href="http://SecurePasswords.info">SecurePasswords.info</a> project, I wanted to share this here as well.</em></p>
+
+<p>Yii2 Framework ships with support for <a href="http://php.net/crypt"><code>crypt()</code></a> and <a href="http://php.net/password"><code>ext/password</code></a> via it's security component.</p>
+
+<h2>Installation</h2>
+
+<p>Yii2 security comes installed with a yii2 composer install, nothing special is required.</p>
+
+<h2>Usage</h2>
+
+<p>By default Yii2 uses <code>crypt()</code> for hashing, but if you have PHP >= 5.5.0 we recommend you use <code>ext/password</code> by adding the following in your <code>config/web.php</code> file.</p>
+
+<pre><code class="php">&lt;?php
+return [
+  ...
+  'components' =&gt; [
+    ...
+    'security' =&gt; [
+      'passwordHashStrategy' =&gt; 'password_hash'
+      ...
+      ]
+      ]
+    ];
+</code></pre>
+
+<p>For more security documentation please visit <a href="http://stuff.cebe.cc/yii2docs/guide-security-passwords.html">Yii2 Security - Passwords</a></p>
+
+<h2>Hashing passwords</h2>
+
+<pre><code class="php">$hash = Yii::$app-&gt;getSecurity()-&gt;generatePasswordHash($password);
+</code></pre>
+
+<h2>Verifying a password</h2>
+
+<pre><code class="php">if (Yii::$app-&gt;getSecurity()-&gt;validatePassword($password, $hash)) {
+// all good, logging user in
+} else {
+  // wrong password
+}
+</code></pre>
+
+<p><a href="http://securepasswords.info/yii2-framework/">SecurePasswords.info - Yii2 Framework</a></p>
+
+        </div>
+                    <p class="categories">
+            Categories:
+                        <a href="/blog/categories/yii2">yii2</a>,                         <a href="/blog/categories/secure">secure</a>,                         <a href="/blog/categories/passwords">passwords</a>                        </p>
+                
+            </article>
+                </div>
+                <div class="span4 sidebar">
+                    <div class="well">
+                        <h4>Jasrags.github.io <small>Ramblings from Dallas, TX</small></h4>
+                    </div>
+                    <div class="well sidebar-nav">
+                        <ul class="nav">
+                            <li><a href="mailto:jrags@jasrags.net"><i class="fa fa-envelope-square fa-5x"></i></a></li>
+                            <li><a href="http://twitter.com/Jasrags"><i class="fa fa-twitter-square fa-5x"></i></li>
+                            <li><a href="https://www.linkedin.com/in/jasrags" alt="LinkedIn"><i class="fa fa-linkedin-square fa-5x"></i></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="container">
+            &copy; 2015 Jasrags.github.io
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+        <script src="/components/bootstrap/js/bootstrap.min.js"></script>
+                
+                <script src="/components/highlightjs/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>
